@@ -13,6 +13,16 @@ function App() {
     }
   }
 
+  const submitMessages = async () => {
+    try {
+      const response = await fetch("./.netlify/functions/chat");
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -31,6 +41,10 @@ function App() {
         <button
           onClick={sayHello}>
             Hello
+        </button>
+        <button
+          onClick={submitMessages}>
+            Chat
         </button>
       </header>
     </div>
