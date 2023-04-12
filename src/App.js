@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  console.log(process.env.NETLIFY);
   return (
     <div className="App">
       <header className="App-header">
@@ -20,8 +19,9 @@ function App() {
         </a>
         <button
           onClick={() => {
-            console.log(`${process.env.URL}/.netlify/functions/hello`);
-            fetch(`${process.env.URL}/.netlify/functions/hello`)
+            // console.log(`${process.env.URL}/.netlify/functions/hello`);
+            // fetch(`${process.env.URL}/.netlify/functions/hello`)
+            fetch("/.netlify/functions/hello")
               .then((resp) => {
                 console.log(resp.json());
               })
