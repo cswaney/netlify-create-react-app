@@ -18,23 +18,19 @@ const messages = [
 ]
 
 exports.handler = async function (event, context) {
-  openai.createChatCompletion({
+  const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: messages,  // JSON.parse(event.body)
   })
-    .then((response) => {
-      console.log(response);
-      const assistantMessage = response.data.choices[0].message;
-      return {
-        statusCode: 200,
-        body: JSON.stringify([...messages, assistantMessage]),
-      }
-    })
-    .catch((response) => {
-      console.log(response);
-      return {
-        statusCode: 400,
-        body: JSON.stringify(response),
-      }
-    })
+  if (response.status === 200) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify(response.data),
+    }
+  } else {
+    return {
+      statusCode: response.status,
+      body: response.statusText, 
+    }
+  }
 };
