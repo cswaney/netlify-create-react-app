@@ -2,6 +2,16 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const sayHello = async () => {
+    try {
+      const response = await fetch("./.netlify/functions/hello");
+      return response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,17 +28,7 @@ function App() {
           Learn React
         </a>
         <button
-          onClick={() => {
-            // console.log(`${process.env.URL}/.netlify/functions/hello`);
-            // fetch(`${process.env.URL}/.netlify/functions/hello`)
-            fetch("/.netlify/functions/hello")
-              .then((resp) => {
-                console.log(resp.json());
-              })
-              .catch((resp) => {
-                console.log(resp);
-              })
-          }}>
+          onClick={sayHello}>
             Hello
         </button>
       </header>
