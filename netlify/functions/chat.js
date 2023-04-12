@@ -23,6 +23,7 @@ exports.handler = async function (event, context) {
     messages: messages,  // JSON.parse(event.body)
   })
     .then((response) => {
+      console.log(response);
       const assistantMessage = response.data.choices[0].message;
       return {
         statusCode: 200,
@@ -30,6 +31,7 @@ exports.handler = async function (event, context) {
       }
     })
     .catch((response) => {
+      console.log(response);
       return {
         statusCode: 400,
         body: JSON.stringify(response),
