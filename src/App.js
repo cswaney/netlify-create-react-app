@@ -6,7 +6,7 @@ function App() {
   const sayHello = async () => {
     try {
       const response = await fetch("./.netlify/functions/hello");
-      return response.json();
+      console.log(response.json());
     } catch (error) {
       console.log(error);
     }
