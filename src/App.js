@@ -19,8 +19,8 @@ function App() {
         </a>
         <button
           onClick={() => {
-            console.log(`${process.env.DEPLOY_URL}/.netlify/functions/hello`);
-            fetch(`${process.env.DEPLOY_URL}/.netlify/functions/hello`)
+            console.log(`${process.env.URL}/.netlify/functions/hello`);
+            fetch(`${process.env.URL}/.netlify/functions/hello`)
               .then((resp) => {
                 console.log(resp.json());
               })
