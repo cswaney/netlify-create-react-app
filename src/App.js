@@ -6,7 +6,8 @@ function App() {
   const sayHello = async () => {
     try {
       const response = await fetch("./.netlify/functions/hello");
-      console.log(response.json());
+      const json = await response.json();
+      console.log(`${json.role} says ${json.content}`);
     } catch (error) {
       console.log(error);
     }
