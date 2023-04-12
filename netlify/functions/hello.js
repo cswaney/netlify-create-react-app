@@ -1,5 +1,3 @@
-import { Configuration, OpenAIApi } from 'openai';
-
 exports.handler = async function (event) {
   console.log("This isn't really a secret: ", process.env.TEST_VARIABLE);
   const response = {
