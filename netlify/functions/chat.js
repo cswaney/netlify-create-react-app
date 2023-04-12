@@ -15,23 +15,12 @@ const messages = [
     role: "user",
     content: "Who won the world series in 2020?"
   },
-  {
-    role: "assistant",
-    content: "The Los Angeles Dodgers won the World Series in 2020."
-  },
-  {
-    role: "user",
-    content: "Where was it played?"
-  },
 ]
 
-
-exports.handler = async function (event) {
-  // const messages = JSON.parse(event.body);
+exports.handler = async function (event, context) {
   openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    // messages: JSON.parse(event.body),
-    messages: messages,
+    messages: messages,  // JSON.parse(event.body)
   })
     .then((response) => {
       const assistantMessage = response.data.choices[0].message;
