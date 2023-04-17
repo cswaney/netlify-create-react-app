@@ -58,7 +58,7 @@ function App() {
         </button>
         <button
           onClick={fetchUser}>
-            Chat
+            Fetch
         </button>
       </header>
     </div>
