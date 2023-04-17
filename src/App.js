@@ -27,7 +27,7 @@ function App() {
     try {
       const response = await fetch("./.netlify/functions/fauna");
       const json = await response.json();
-      console.log(`${json.data.name} says ${json.data.createdAt}`);
+      console.log(`User: ${json.data.name}\nCreated: ${json.data.createdAt}`);
     } catch (error) {
       console.log(error);
     }
