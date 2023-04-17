@@ -23,6 +23,16 @@ function App() {
     }
   }
 
+  const fetchUser = async () => {
+    try {
+      const response = await fetch("./.netlify/functions/fauna");
+      const json = await response.json();
+      console.log(`User: ${json.data.name}\nCreated: ${json.data.createdAt}`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -45,6 +55,10 @@ function App() {
         <button
           onClick={submitMessages}>
             Chat
+        </button>
+        <button
+          onClick={fetchUser}>
+            Fetch
         </button>
       </header>
     </div>
