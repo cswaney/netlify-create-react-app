@@ -1,7 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import useAuth from './hooks/useAuth';
 
 function App() {
+
+  const user = "Colin";
+  const {
+    data: userData,
+    loading: userLoading,
+    error: userError
+  } = useAuth(user)
 
   const sayHello = async () => {
     try {
@@ -24,13 +32,13 @@ function App() {
   }
 
   const fetchUser = async () => {
-    try {
-      const response = await fetch("./.netlify/functions/fauna");
-      const json = await response.json();
-      console.log(`User: ${json.data.name}\nCreated: ${json.data.createdAt}`);
-    } catch (error) {
-      console.log(error);
+    const response = await fetch("./.netlify/functions/fauna");
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.log(`Error: ${errorText}`);
     }
+    const body = await response.json();
+    console.log(`User: ${body.data.name}\nCreated: ${body.data.createdAt}`);
   }
 
   return (
@@ -48,9 +56,16 @@ function App() {
         >
           Learn React
         </a>
+        {userLoading ? (
+            <p>Loading...</p>
+          ) : userError ? (
+            <p>{userError}</p>
+          ) : (
+            <p>Welcome, {userData.name}</p>
+          )}
         <button
           onClick={sayHello}>
-            Hello
+            Say Hello
         </button>
         <button
           onClick={submitMessages}>
@@ -58,7 +73,7 @@ function App() {
         </button>
         <button
           onClick={fetchUser}>
-            Fetch
+            Fetch User
         </button>
       </header>
     </div>
